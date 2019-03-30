@@ -35,6 +35,7 @@ public class RdsController {
             .map(pksCluster -> VirtualHost.newBuilder()
                 .setName(pksCluster.getName())
                 .addDomains(pksCluster.getParameters().getKubernetesMasterHost())
+                .addDomains(pksCluster.getParameters().getKubernetesMasterHost() + ":8443")
                 .addRoutes(Route.newBuilder()
                     .setMatch(RouteMatch.newBuilder()
                         .setPrefix("/")

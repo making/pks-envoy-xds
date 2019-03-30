@@ -6,9 +6,13 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
 import io.envoyproxy.envoy.api.v2.DiscoveryResponse;
 import io.envoyproxy.envoy.api.v2.Listener;
+import io.envoyproxy.envoy.api.v2.auth.CommonTlsContext;
+import io.envoyproxy.envoy.api.v2.auth.DownstreamTlsContext;
+import io.envoyproxy.envoy.api.v2.auth.TlsCertificate;
 import io.envoyproxy.envoy.api.v2.core.Address;
 import io.envoyproxy.envoy.api.v2.core.ApiConfigSource;
 import io.envoyproxy.envoy.api.v2.core.ConfigSource;
+import io.envoyproxy.envoy.api.v2.core.DataSource;
 import io.envoyproxy.envoy.api.v2.core.SocketAddress;
 import io.envoyproxy.envoy.api.v2.listener.Filter;
 import io.envoyproxy.envoy.api.v2.listener.FilterChain;
@@ -54,14 +58,27 @@ public class LdsController {
             .setAddress(Address.newBuilder()
                 .setSocketAddress(SocketAddress.newBuilder()
                     .setAddress("0.0.0.0")
-                    .setPortValue(10000)
+                    .setPortValue(8443)
                     .build())
                 .build())
             .addFilterChains(FilterChain.newBuilder()
                 .addFilters(Filter.newBuilder()
                     .setName("envoy.http_connection_manager")
                     .setTypedConfig(Any.pack(httpConnectionManager))
-                    .build()))
+                    .build())
+                .setTlsContext(DownstreamTlsContext.newBuilder()
+                    .setCommonTlsContext(CommonTlsContext.newBuilder()
+                        .addTlsCertificates(TlsCertificate.newBuilder()
+                            .setCertificateChain(DataSource.newBuilder()
+                                .setFilename("/etc/envoy/cert.pem")
+                                .build())
+                            .setPrivateKey(DataSource.newBuilder()
+                                .setFilename("/etc/envoy/private.pem")
+                                .build())
+                            .build())
+                        .build())
+                    .build())
+            )
             .build();
         return this.printer.print(DiscoveryResponse
             .newBuilder()
