@@ -17,7 +17,7 @@ public class PksApiClient {
                 .setParameters(new PksCluster.Parameters() {
 
                     {
-                        setKubernetesMasterHost("demo1.pks.example.com");
+                        setKubernetesMasterHost("demo1.pks.bosh.tokyo");
                         setKubernetesMasterPort(443);
                     }
                 })
@@ -30,7 +30,7 @@ public class PksApiClient {
                 .setParameters(new PksCluster.Parameters() {
 
                     {
-                        setKubernetesMasterHost("demo2.pks.example.com");
+                        setKubernetesMasterHost("demo2.pks.bosh.tokyo");
                         setKubernetesMasterPort(443);
                     }
                 })
