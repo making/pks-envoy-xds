@@ -80,6 +80,6 @@ public class EdsController {
                 } catch (InvalidProtocolBufferException e) {
                     return Mono.error(e);
                 }
-            });
+            }).log("endpoints");
     }
 }

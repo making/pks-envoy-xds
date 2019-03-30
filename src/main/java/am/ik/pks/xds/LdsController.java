@@ -67,7 +67,6 @@ public class LdsController {
             .newBuilder()
             .setTypeUrl("")
             .addResources(Any.pack(listener)));
-        System.out.println("listeners: " + response);
         return response;
     }
 }
