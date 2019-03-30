@@ -1,0 +1,42 @@
+node:
+  cluster: demo-cluster
+  id: demo0
+admin:
+  access_log_path: /dev/stdout
+  address:
+    socket_address:
+      protocol: TCP
+      address: 0.0.0.0
+      port_value: 9901
+dynamic_resources:
+  lds_config:
+    api_config_source:
+      api_type: REST
+      refresh_delay: 10s
+      request_timeout: 3s
+      cluster_names:
+        - pks-xds
+  cds_config:
+    api_config_source:
+      api_type: REST
+      refresh_delay: 10s
+      request_timeout: 3s
+      cluster_names:
+        - pks-xds
+static_resources:
+  clusters:
+    - name: pks-xds
+      connect_timeout: 3.0s
+      dns_lookup_family: V4_ONLY
+      lb_policy: ROUND_ROBIN
+      protocol_selection: USE_DOWNSTREAM_PROTOCOL
+      http_protocol_options: {}
+      load_assignment:
+        cluster_name: pks-xds
+        endpoints:
+          - lb_endpoints:
+              - endpoint:
+                  address:
+                    socket_address:
+                      address: 192.168.65.2 # docker host
+                      port_value: 8080

@@ -1,0 +1,6 @@
+[submodule "src/main/proto"]
+	path = src/main/proto
+	url = https://github.com/envoyproxy/data-plane-api.git
+[submodule "java-control-plane"]
+	path = java-control-plane
+	url = https://github.com/envoyproxy/java-control-plane.git
