@@ -18,5 +18,5 @@ docker run --rm \
 
 
 ```
-curl localhost:10000 -H "Host: demo1.pks.bosh.tokyo:8443"
+curl https://demo1.pks.bosh.tokyo:8443
 ```
