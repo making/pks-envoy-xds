@@ -39,7 +39,7 @@ public class LdsController {
 
         HttpConnectionManager httpConnectionManager = HttpConnectionManager.newBuilder()
             .setStatPrefix("ingress_http")
-            .setCodecType(HttpConnectionManager.CodecType.HTTP1)
+            .setCodecType(HttpConnectionManager.CodecType.AUTO)
             .setRds(Rds.newBuilder()
                 .setRouteConfigName("pks-route")
                 .setConfigSource(ConfigSource.newBuilder()
