@@ -63,10 +63,9 @@ public class LdsController {
                     .setTypedConfig(Any.pack(httpConnectionManager))
                     .build()))
             .build();
-        String response = this.printer.print(DiscoveryResponse
+        return this.printer.print(DiscoveryResponse
             .newBuilder()
             .setTypeUrl("")
             .addResources(Any.pack(listener)));
-        return response;
     }
 }
