@@ -65,7 +65,7 @@ public class LdsController {
             .setAddress(Address.newBuilder()
                 .setSocketAddress(SocketAddress.newBuilder()
                     .setAddress("0.0.0.0")
-                    .setPortValue(8443)
+                    .setPortValue(this.props.getListenerPort())
                     .build())
                 .build())
             .addFilterChains(FilterChain.newBuilder()

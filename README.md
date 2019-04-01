@@ -10,7 +10,7 @@ docker run --rm \
   -v $(pwd)/envoy.yaml:/etc/envoy/envoy.yaml \
   -v ${HOME}/gdrive/letsencrypt/bosh.tokyo/fullchain.pem:/etc/envoy/cert.pem \
   -v ${HOME}/gdrive/letsencrypt/bosh.tokyo/privkey.pem:/etc/envoy/private.pem \
-  -p 8443:8443 \
+  -p 18443:18443 \
   -p 9901:9901 \
   envoyproxy/envoy-dev:48082bcd22fe9165eb73bed6d27857f578df63b5 \
   /usr/local/bin/envoy -l debug -c /etc/envoy/envoy.yaml
@@ -18,5 +18,5 @@ docker run --rm \
 
 
 ```
-curl https://demo1.pks.bosh.tokyo:8443
+curl https://demo1.pks.bosh.tokyo:18443
 ```

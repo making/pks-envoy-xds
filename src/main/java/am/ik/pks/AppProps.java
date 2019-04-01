@@ -7,9 +7,19 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "pks.envoy")
 public class AppProps {
 
+    private int listenerPort = 18443;
+
     private String tlsPrivateKey = "/etc/envoy/cert.pem";
 
     private String tlsCertificate = "/etc/envoy/private.pem";
+
+    public int getListenerPort() {
+        return listenerPort;
+    }
+
+    public void setListenerPort(int listenerPort) {
+        this.listenerPort = listenerPort;
+    }
 
     public String getTlsPrivateKey() {
         return tlsPrivateKey;
