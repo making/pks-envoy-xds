@@ -1,5 +1,6 @@
 package am.ik.pks.xds;
 
+import am.ik.pks.AppProps;
 import com.google.protobuf.Any;
 import com.google.protobuf.Duration;
 import com.google.protobuf.InvalidProtocolBufferException;
@@ -31,6 +32,12 @@ public class LdsController {
             .add(Listener.getDescriptor())
             .add(HttpConnectionManager.getDescriptor())
             .build());
+
+    private final AppProps props;
+
+    public LdsController(AppProps props) {
+        this.props = props;
+    }
 
     @PostMapping(path = "/v2/discovery:listeners")
     public String discoveryListeners(@RequestBody String input) throws InvalidProtocolBufferException {
@@ -70,10 +77,10 @@ public class LdsController {
                     .setCommonTlsContext(CommonTlsContext.newBuilder()
                         .addTlsCertificates(TlsCertificate.newBuilder()
                             .setCertificateChain(DataSource.newBuilder()
-                                .setFilename("/etc/envoy/cert.pem")
+                                .setFilename(this.props.getTlsCertificate())
                                 .build())
                             .setPrivateKey(DataSource.newBuilder()
-                                .setFilename("/etc/envoy/private.pem")
+                                .setFilename(this.props.getTlsPrivateKey())
                                 .build())
                             .build())
                         .build())
