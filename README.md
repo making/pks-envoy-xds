@@ -7,7 +7,7 @@ java -jar target/pks-envoy-xds-0.0.1-SNAPSHOT.jar
 
 ```
 docker run --rm \
-  -v $(pwd)/envoy.yml:/etc/envoy/envoy.yaml \
+  -v $(pwd)/envoy.yaml:/etc/envoy/envoy.yaml \
   -v ${HOME}/gdrive/letsencrypt/bosh.tokyo/fullchain.pem:/etc/envoy/cert.pem \
   -v ${HOME}/gdrive/letsencrypt/bosh.tokyo/privkey.pem:/etc/envoy/private.pem \
   -p 8443:8443 \
